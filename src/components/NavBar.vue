@@ -12,6 +12,44 @@
 </template>
 
 <style scoped>
+
+/* header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 3%;
+    background-color: #6bec68;
+
+} */
+header {
+    background-color: transparent !important; /* Force la transparence */
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 3%;
+}
+
+header .logo {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #fff;
+}
+
+header nav {
+    display: flex;
+    gap: 20px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
 .custom-navbar {
   display: flex;
   justify-content: space-between;

@@ -8,8 +8,33 @@
     </footer>
 </template>
 
-<style>
-.footerelement {
+<style scoped>
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 10%;
+    text-align: center;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer .social {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+footer .social a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.footer-element {
       display: flex;
   align-items: center;
   justify-content: center;

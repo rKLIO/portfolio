@@ -25,10 +25,11 @@ import SilkBackground from './components/SilkBackground.vue'
     </div>
   </section>
 
-  <section id="about">
-    <!-- <h2>À propos de moi</h2> -->
-    <p><em>" Je suis un étudiant en informatique passionné par le développement web et les nouvelles technologies. J'aime créer des projets innovants et apprendre constamment de nouvelles compétences pour améliorer mes connaissances dans le domaine de l'informatique. "</em></p>
-  </section>
+  <section class="main-content">
+    <section id="about">
+      <!-- <h2>À propos de moi</h2> -->
+      <p><em>" Je suis un étudiant en informatique passionné par le développement web et les nouvelles technologies. J'aime créer des projets innovants et apprendre constamment de nouvelles compétences pour améliorer mes connaissances dans le domaine de l'informatique. "</em></p>
+    </section>
 
   
   <section id="outils">
@@ -157,6 +158,7 @@ import SilkBackground from './components/SilkBackground.vue'
       <h2>Mes Réalisations</h2> 
       <RealisationCarousel />
     </section>
+  </section>
 
   <Footer />
   
