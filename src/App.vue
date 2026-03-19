@@ -4,15 +4,24 @@ import Footer from './components/Footer.vue'
 import SkillCard from './components/SkillCard.vue'
 import RealisationCarousel from './components/RealisationCarousel.vue'
 import Tools from './components/Tools.vue'
+import SilkBackground from './components/SilkBackground.vue'
 
 </script>
 
 <template>
+  
   <Navbar />
 
   <section style="padding:0;">
     <div class="banner anim">
-      <h1 class="banner-title" style="padding-left: 30px;">CLIO Kendrick</h1>
+      <SilkBackground 
+      :speed="5" 
+      :scale="1" 
+      color="#6bec68" 
+      :noiseIntensity="1.5" 
+      :rotation="0" 
+    />
+      <h1 class="banner-title" style="padding-left: 30px;"><b> CLIO Kendrick </b></h1>
     </div>
   </section>
 

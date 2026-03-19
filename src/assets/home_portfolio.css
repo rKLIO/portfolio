@@ -6,18 +6,30 @@ body {
     background-color: #181818;
 }
 
-header {
+/* header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 3%;
     background-color: #6bec68;
+
+} */
+
+header {
+    background-color: transparent !important; /* Force la transparence */
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 3%;
 }
 
 header .logo {
     font-size: 1.5em;
     font-weight: 600;
-    color: #333;
+    color: #fff;
 }
 
 header nav {
@@ -27,20 +39,31 @@ header nav {
 
 header nav a {
     text-decoration: none;
-    color: #181818;
+    color: #fff;
     font-weight: 500;
     font-size: 1.1em;
 }
 
-.banner {
+/* .banner {
     background: #6bec68;
     height: 700px;
     display: flex;
-    justify-content: left; /* Maintient le contenu aligné à gauche */
+    justify-content: left;
     align-items: center;
-    position: relative; /* Nécessaire pour positionner les éléments enfants absolus */
+    position: relative;
     color: black;
     text-align: center;
+} */
+
+.banner {
+    height: 750px; /* Augmentez un peu la hauteur si nécessaire */
+    margin-top: 0;  /* Assurez-vous qu'il n'y a pas de marge en haut */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: transparent; /* L'animation Silk fera office de fond */
 }
 
 .banner-title {
@@ -48,7 +71,7 @@ header nav a {
     bottom: 20px; /* Distance entre le texte et le bas de la bannière */
     left: 20px; /* Distance entre le texte et le bord gauche */
     font-weight: 500; /* Texte en gras */
-    color: #000; /* Couleur noire pour le texte */
+    color: #fff; /* Couleur noire pour le texte */
     margin: 0; /* Supprime les marges par défaut */
 }
 
