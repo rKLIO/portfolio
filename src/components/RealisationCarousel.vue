@@ -1,5 +1,8 @@
 <script setup>
 import { onMounted } from 'vue'
+import carteetmemoire from '../assets/image_cartesetmemoire/menu.png'
+import wesportLogo from '../assets/image_wesport/logo_only.png'
+import partesLogo from '../assets/image_partes/partes-logo+nom-blanc.png'
 
 onMounted(() => {
   // Utilisation de la logique de ton fichier realisations_carousel.js
@@ -28,48 +31,63 @@ onMounted(() => {
     });
   }
 })
+
 </script>
 
 <template>
   <div class="owl-carousel custom-carousel owl-theme">
-    <div class="item active" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/dota-2.jpg);">
+    <div class="item active" :style="{ backgroundImage: `url(${carteetmemoire})` }">
       <div class="item-desc">
-        <h3>Dota 2</h3>
+        <h3>Jeux Cartes et Mémoire</h3>
         <p>Dota 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
           Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
       </div>
     </div>
-    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/winter-3.jpg);">
+    <div class="item" :style="{ backgroundImage: `url(${partesLogo})` }">
       <div class="item-desc">
-        <h3>The Witcher 3</h3>
+        <h3>Partes</h3>
         <p>The Witcher 3 is a multiplayer online battle arena by Valve. The game is a sequel to Defense
           of the Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
       </div>
     </div>
-    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/rdr-2.jpg);">
+    <div class="item" :style="{ backgroundImage: `url(${wesportLogo})` }">
       <div class="item-desc">
-        <h3>RDR 2</h3>
-        <p>RDR 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+        <h3>WESPORT!</h3>
+        <p>PUBG 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
           Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
       </div>
     </div>
-    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/pubg.jpg);">
+    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/rdr-2.jpg);">
       <div class="item-desc">
-        <h3>PUBG Mobile</h3>
-        <p>PUBG 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
+        <h3>IA Vision</h3>
+        <p>RDR 2 is a multiplayer online battle arena by Valve. The game is a sequel to Defense of the
           Ancients, which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
       </div>
     </div>
     <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/fortnite.jpg);">
       <div class="item-desc">
-        <h3>Fortnite</h3>
+        <h3>KREYOL NOU</h3>
         <p>Battle royale where 100 players fight to be the last person standing. which was a community-created mod
           for Blizzard Entertainment's Warcraft III.</p>
       </div>
     </div>
     <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/far-cry-5.jpg);">
       <div class="item-desc">
-        <h3>Far Cry 5</h3>
+        <h3>PATHWAY PLEASE</h3>
+        <p>Far Cry 5 is a 2018 first-person shooter game developed by Ubisoft.
+          which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+      </div>
+    </div>
+    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/far-cry-5.jpg);">
+      <div class="item-desc">
+        <h3>THE LEGEND OF LINK</h3>
+        <p>Far Cry 5 is a 2018 first-person shooter game developed by Ubisoft.
+          which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
+      </div>
+    </div>
+    <div class="item" style="background-image: url(https://www.yudiz.com/codepen/expandable-animated-card-slider/far-cry-5.jpg);">
+      <div class="item-desc">
+        <h3>FARM LIFE</h3>
         <p>Far Cry 5 is a 2018 first-person shooter game developed by Ubisoft.
           which was a community-created mod for Blizzard Entertainment's Warcraft III.</p>
       </div>

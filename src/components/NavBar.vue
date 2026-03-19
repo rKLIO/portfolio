@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="logo">CLIO</div>
+    <div class="logo">CLIO K.</div>
     <nav>
       <a href="#">Curriculum Vitae</a>
       <a href="#">Passion</a>
