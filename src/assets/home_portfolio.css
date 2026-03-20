@@ -4,11 +4,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #181818;
-}
-
-
-
-
+}   
 
 /* .banner {
     background: #6bec68;
@@ -22,12 +18,12 @@ body {
 } */
 
 .banner {
-    height: 750px; 
+    height: 700px; 
     margin-top: 0;
     display: flex;
     justify-content: left;
     align-items: center;
-    position: sticky; /* Garde la bannière fixe au scroll */
+    position: relative; /* Garde la bannière fixe au scroll */
     top: 0;           /* <--- AJOUTE CECI pour activer le sticky */
     z-index: 1;       /* Reste en dessous du main-content */
     overflow: hidden;
@@ -48,11 +44,21 @@ body {
     margin: 0;
 }
 
-/* .main-content {
+.main-content {
     position: relative;
     z-index: 10; 
     background-color: #181818; 
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.5); 
+    box-shadow: 0 -50px 50px rgba(24, 24, 24, .9);
+    /* AJOUTE CECI : */
+    padding: 1.5rem 5%;
+    
+    /* Assure-toi qu'il n'y a pas d'overflow caché ici qui couperait l'ombre */
+    padding-top: 2rem; /* Évite la fusion des marges */
+}
+
+/* #about {
+    padding: 1.5rem 5%;
+    background-color: #181818;
 } */
 
 .content {
@@ -68,9 +74,9 @@ section h2 {
 }
 
 section {    
-    background-color: #181818;
-    padding: 0% 5%;
+    background-color: #181818;  
     margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 section p {
@@ -82,127 +88,4 @@ section img {
     border-radius: 8px;
 }
 
-.articles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
 
-.article {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.article img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.article .content {
-    padding: 20px;
-}
-
-.article h3 {
-    margin: 0 0 10px;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.article p {
-    margin: 0;
-    color: #666;
-}
-
-
-
-/*---------------------------------------------------------*/
-
-/* Style du carrousel */
-.carousel {
-    width: 80%;
-    max-width: 800px;
-    margin: 50px auto;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Conteneur des cartes */
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-/* Styles des cartes */
-.carousel-card {
-    flex-shrink: 0; /* Les cartes ne vont pas se réduire */
-    width: 200px;
-    height: 150px;
-    background-color: #ffffff;
-    margin: 0 10px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    font-family: 'Poppins', sans-serif;
-    color: #333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    opacity: 0.7; /* Par défaut, les cartes sont légèrement transparentes */
-    transition: transform 0.3s, opacity 0.3s; /* Transition douce */
-}
-
-/* Effet au survol d'une carte */
-.carousel-card:hover {
-    opacity: 1; /* Met la carte à 100% d'opacité */
-    transform: scale(1.1); /* Agrandit légèrement la carte */
-}
-
-/* Met en avant la carte active (celle survolée) */
-.carousel-card.active {
-    transform: scale(1.2); /* Agrandit davantage la carte survolée */
-    opacity: 1; /* Mets la carte en pleine opacité */
-}
-
-
-.card {
-  position: relative;
-  z-index: 555;
-  max-width: 20rem;
-  min-height: 20rem;
-  width: 90%;
-  display: grid;
-  place-content: center;
-  place-items: center;
-  text-align: center;
-  position: relative;
-  box-shadow: 0.063em 0.75em 1.563em rgb(0 0 0 / 78%);
-  border-radius: 2.25rem;
-}
-
-.card-body {
-    position: absolute;
-    width: 100%;
-    display: block;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0.7em 1.25em 0.5em 1.5em;
-}
-
-.card-body h3 {
-    color: #fff;
-    font-size: 1.375rem;
-    margin-top: 0.625em;
-    margin-bottom: 0.188em;
-    text-transform: capitalize;
-    font-weight: 600;
-}
-
-.card-body p {
-    color: #ddd;
-    font-size: 1rem;
-    letter-spacing: 0.031rem;
-}

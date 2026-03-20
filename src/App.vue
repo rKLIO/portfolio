@@ -1,4 +1,9 @@
 <script setup>
+
+import { onMounted } from 'vue' // AJOUT : Import de onMounted
+import gsap from 'gsap'         // AJOUT : Import GSAP
+import { ScrollTrigger } from 'gsap/ScrollTrigger' // AJOUT : Import ScrollTrigger
+
 import Navbar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
 import SkillCard from './components/SkillCard.vue'
@@ -6,27 +11,52 @@ import RealisationCarousel from './components/RealisationCarousel.vue'
 import Tools from './components/Tools.vue'
 import SilkBackground from './components/SilkBackground.vue'
 
+// Enregistrement du plugin
+gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  // On "épingle" la bannière au sommet
+  ScrollTrigger.create({
+    trigger: ".banner",
+    start: "top top",
+    end: "bottom top", // L'effet dure tant que le bas de la bannière n'a pas atteint le haut
+    pin: true,        // Bloque la bannière
+    pinSpacing: false // IMPORTANT : Empêche GSAP de créer un vide, permet l'overlap
+  })
+
+  // Optionnel : On fait disparaître le titre doucement au scroll
+  gsap.to(".banner-title", {
+    scrollTrigger: {
+      trigger: ".banner",
+      start: "top top",
+      end: "bottom 20%",
+      scrub: true
+    },
+    opacity: 0,
+    y: -50
+  })
+})
+
 </script>
 
 <template>
   
   <Navbar />
-
-  <section style="padding:0;">
-    <div class="banner anim">
+<!-- style="padding:0;" -->
+  
+    <div class="banner">
       <SilkBackground 
-      :speed="5" 
+      :speed="10" 
       :scale="1" 
       color="#6bec68" 
-      :noiseIntensity="1.5" 
+      :noiseIntensity="2" 
       :rotation="0" 
     />
       <h1 class="banner-title" style="padding-left: 30px;"><b> CLIO Kendrick </b></h1>
     </div>
-  </section>
 
   <section class="main-content">
-    <section id="about">
+    <section id="about" class="about-section" >
       <!-- <h2>À propos de moi</h2> -->
       <p><em>" Je suis un étudiant en informatique passionné par le développement web et les nouvelles technologies. J'aime créer des projets innovants et apprendre constamment de nouvelles compétences pour améliorer mes connaissances dans le domaine de l'informatique. "</em></p>
     </section>
@@ -136,10 +166,6 @@ import SilkBackground from './components/SilkBackground.vue'
           <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="tool-icon" />
           <span>GSAP</span>
         </div>
-        <!-- <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="tool-icon" />
-          <span>React</span>
-        </div> -->
       </template>
 
     </Tools>
@@ -154,7 +180,7 @@ import SilkBackground from './components/SilkBackground.vue'
       </div>
   </section> -->
 
-  <section class="game-section" style="padding: 0 5%">
+  <section class="game-section">
       <h2>Mes Réalisations</h2> 
       <RealisationCarousel />
     </section>

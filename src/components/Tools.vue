@@ -46,6 +46,10 @@ const selectTab = (index) => {
 </template>
 
 <style scoped>
+
+label {
+  margin-bottom: 0;
+}
 /* --- STYLE DU GLIDER (Inspiré de ton Codepen) --- */
 .tabs-container {
   display: flex;
@@ -56,10 +60,13 @@ const selectTab = (index) => {
 .tabs {
   display: flex;
   position: relative;
-  background-color: #fff;
+  background-color: #2a2a2a;
   box-shadow: 0 0 1px 0 rgba(0,0,0,0.1), 0 6px 12px 0 rgba(0,0,0,0.1);
   padding: 0.75rem;
   border-radius: 99px;
+  border: 1px solid #444;
+  justify-content: space-between;
+  
 }
 
 .tab {
@@ -73,7 +80,7 @@ const selectTab = (index) => {
   cursor: pointer;
   transition: color 0.15s ease-in;
   z-index: 2;
-  color: #666;
+  color: #fff;
 }
 
 .active-text {

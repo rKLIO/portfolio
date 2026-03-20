@@ -21,6 +21,7 @@
     background-color: #6bec68;
 
 } */
+
 header {
     background-color: transparent !important; /* Force la transparence */
     position: absolute;
