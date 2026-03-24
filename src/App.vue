@@ -1,191 +1,51 @@
 <script setup>
-
-import { onMounted } from 'vue' // AJOUT : Import de onMounted
-import gsap from 'gsap'         // AJOUT : Import GSAP
-import { ScrollTrigger } from 'gsap/ScrollTrigger' // AJOUT : Import ScrollTrigger
-
 import Navbar from './components/NavBar.vue'
 import Footer from './components/Footer.vue'
-import SkillCard from './components/SkillCard.vue'
-import RealisationCarousel from './components/RealisationCarousel.vue'
-import Tools from './components/Tools.vue'
-import SilkBackground from './components/SilkBackground.vue'
 
-// Enregistrement du plugin
+import { onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+const route = useRoute()
 gsap.registerPlugin(ScrollTrigger)
 
-onMounted(() => {
-  // On "épingle" la bannière au sommet
-  ScrollTrigger.create({
-    trigger: ".banner",
-    start: "top top",
-    end: "bottom top", // L'effet dure tant que le bas de la bannière n'a pas atteint le haut
-    pin: true,        // Bloque la bannière
-    pinSpacing: false // IMPORTANT : Empêche GSAP de créer un vide, permet l'overlap
-  })
+const initReveals = () => {
+  // On récupère tous les éléments .reveal qui ne sont pas encore animés
+  const items = document.querySelectorAll('.reveal');
+  
+  items.forEach((el) => {
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%", // Se déclenche quand l'élément est à 85% du bas
+        toggleActions: "play none none none", // Ne joue l'animation qu'une fois
+      },
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+  });
+}
 
-  // Optionnel : On fait disparaître le titre doucement au scroll
-  gsap.to(".banner-title", {
-    scrollTrigger: {
-      trigger: ".banner",
-      start: "top top",
-      end: "bottom 20%",
-      scrub: true
-    },
-    opacity: 0,
-    y: -50
-  })
+onMounted(() => {
+  initReveals();
 })
 
+// TRÈS IMPORTANT : Relancer la détection quand on change de page
+watch(() => route.path, () => {
+  // On laisse un petit délai pour que le DOM de la nouvelle page soit prêt
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+    initReveals();
+  }, 100);
+})
 </script>
 
 <template>
-  
   <Navbar />
-<!-- style="padding:0;" -->
-  
-    <div class="banner">
-      <SilkBackground 
-      :speed="10" 
-      :scale="1" 
-      color="#6bec68" 
-      :noiseIntensity="2" 
-      :rotation="0" 
-    />
-      <h1 class="banner-title" style="padding-left: 30px;"><b> CLIO Kendrick </b></h1>
-    </div>
-
-  <section class="main-content">
-    <section id="about" class="about-section" >
-      <!-- <h2>À propos de moi</h2> -->
-      <p><em>" Je suis un étudiant en informatique passionné par le développement web et les nouvelles technologies. J'aime créer des projets innovants et apprendre constamment de nouvelles compétences pour améliorer mes connaissances dans le domaine de l'informatique. "</em></p>
-    </section>
-
-  
-  <section id="outils">
-    <h2>Ma Stack Technique</h2>
-    
-    <Tools>
-      <template #langages>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tool-icon" />
-          <span>Python</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="tool-icon" />
-          <span>JavaScript</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" class="tool-icon" />
-          <span>PHP</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" class="tool-icon" />
-          <span>Dart</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg" class="tool-icon" />
-          <span>Rust</span>
-        </div>
-      </template>
-
-      <template #bdd>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="tool-icon" />
-          <span>MySQL</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" class="tool-icon" />
-          <span>SQLite</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="tool-icon" />
-          <span>MongoDB</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" class="tool-icon" />
-          <span>Supabase</span>
-        </div>
-      </template>
-
-      <template #web>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="tool-icon" />
-          <span>HTML5</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="tool-icon" />
-          <span>CSS3</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" class="tool-icon" />
-          <span>WordPress</span>
-        </div>
-      </template>
-
-      <template #frameworks>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" class="tool-icon" />
-          <span>Django</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" class="tool-icon" />
-          <span>Vue JS</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" class="tool-icon" />
-          <span>Next JS</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-original.svg" class="tool-icon" />
-          <span>Nest JS</span>
-        </div>
-      </template>
-
-      <template #outils>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="tool-icon" />
-          <span>Git</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="tool-icon" />
-          <span>GitHub</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" class="tool-icon" />
-          <span>Apache2</span>
-        </div>
-      </template>
-
-      <template #bibliothèques>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tool-icon" />
-          <span>PythonArcade</span>
-        </div>
-        <div class="tool-card">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="tool-icon" />
-          <span>GSAP</span>
-        </div>
-      </template>
-
-    </Tools>
-  </section>  
-
-  <!-- <section id="competence">
-    <h2>Compétences</h2>
-    <div class="skills-grid">
-      <SkillCard title="Développement" text="TestP" />
-      <SkillCard title="Design" text="TestP" />
-      
-      </div>
-  </section> -->
-
-  <section class="game-section">
-      <h2>Mes Réalisations</h2> 
-      <RealisationCarousel />
-    </section>
-  </section>
-
+  <router-view /> 
   <Footer />
-  
 </template>

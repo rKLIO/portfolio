@@ -1,12 +1,13 @@
 <template>
 
   <header>
-    <div class="logo">CLIO K.</div>
+    <div class="homepage"> 
+      <router-link to="/">CLIO K.</router-link> 
+    </div>
     <nav>
-      <a href="#">Curriculum Vitae</a>
-      <a href="#">Passion</a>
-      <a href="#">Compétences</a>
-      <a href="#">À propos</a>
+      <router-link to="/cv">Curriculum Vitae</router-link>
+      <router-link to="/passion">Passion</router-link>
+      <router-link to="/#outils">Compétences</router-link>
     </nav>
   </header>
 </template>
@@ -24,7 +25,7 @@
 
 header {
     background-color: transparent !important; /* Force la transparence */
-    position: absolute;
+    position: fixed;
     width: 100%;
     z-index: 20;
     display: flex;
@@ -33,7 +34,8 @@ header {
     padding: 30px 3%;
 }
 
-header .logo {
+header .homepage a {
+    text-decoration: none;
     font-size: 1.5em;
     font-weight: 600;
     color: #fff;

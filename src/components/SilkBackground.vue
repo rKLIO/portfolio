@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, onBeforeUnmount, watch } from 'vue'
+import { onMounted, ref, onBeforeUnmount } from 'vue'
 import * as THREE from 'three'
 
 const props = defineProps({
@@ -11,9 +11,24 @@ const props = defineProps({
 })
 
 const containerRef = ref(null)
-let renderer, scene, camera, mesh, material, animationFrame
 
-// Fonction utilitaire pour convertir le Hex en RGB normalisé (0 à 1)
+let renderer = null
+let scene = null
+let camera = null
+let mesh = null
+let material = null
+let animationFrame = null
+let isMounted = true
+
+// ✅ FIX : définie globalement (accessible dans onBeforeUnmount)
+const updateSize = () => {
+  if (!containerRef.value || !renderer) return
+  const { clientWidth, clientHeight } = containerRef.value
+  renderer.setSize(clientWidth, clientHeight)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+}
+
+// Fonction utilitaire
 const hexToRGB = (hex) => {
   const r = parseInt(hex.slice(1, 3), 16) / 255
   const g = parseInt(hex.slice(3, 5), 16) / 255
@@ -21,7 +36,7 @@ const hexToRGB = (hex) => {
   return new THREE.Color(r, g, b)
 }
 
-// Les Shaders originaux de ReactBits
+// Shaders
 const vertexShader = `
 varying vec2 vUv;
 varying vec3 vPosition;
@@ -70,21 +85,21 @@ void main() {
 }`
 
 onMounted(() => {
+  isMounted = true
+
   scene = new THREE.Scene()
   camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-  
-  const updateSize = () => {
-    if (!containerRef.value) return
-    const { clientWidth, clientHeight } = containerRef.value
-    renderer.setSize(clientWidth, clientHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  }
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+  })
 
   containerRef.value.appendChild(renderer.domElement)
   updateSize()
 
   const geometry = new THREE.PlaneGeometry(2, 2)
+
   material = new THREE.ShaderMaterial({
     uniforms: {
       uTime: { value: 0 },
@@ -102,27 +117,59 @@ onMounted(() => {
   scene.add(mesh)
 
   let lastTime = 0
+
   const animate = (t) => {
+    // ✅ Sécurité : stop si démonté
+    if (!isMounted) return
+
     const delta = (t - lastTime) / 1000
     lastTime = t
+
     if (material) {
-      material.uniforms.uTime.value += 0.1 * delta // Vitesse de l'horloge interne
+      material.uniforms.uTime.value += 0.1 * delta
     }
+
     renderer.render(scene, camera)
     animationFrame = requestAnimationFrame(animate)
   }
+
   animate(0)
 
   window.addEventListener('resize', updateSize)
 })
 
 onBeforeUnmount(() => {
-  cancelAnimationFrame(animationFrame)
-  window.removeEventListener('resize', updateSize)
-})
+  // ✅ Stop animation immédiatement
+  isMounted = false
 
-// Mettre à jour les paramètres si les props changent
-watch(() => props.color, (newCol) => material.uniforms.uColor.value = hexToRGB(newCol))
+  if (animationFrame) {
+    cancelAnimationFrame(animationFrame)
+  }
+
+  window.removeEventListener('resize', updateSize)
+
+  // ✅ Clean WebGL complet
+  if (renderer) {
+    renderer.forceContextLoss() // bonus anti leak
+    renderer.dispose()
+
+    if (containerRef.value && renderer.domElement) {
+      containerRef.value.removeChild(renderer.domElement)
+    }
+  }
+
+  if (mesh) {
+    if (mesh.geometry) mesh.geometry.dispose()
+    if (mesh.material) mesh.material.dispose()
+  }
+
+  // Reset
+  renderer = null
+  scene = null
+  camera = null
+  mesh = null
+  material = null
+})
 </script>
 
 <template>
@@ -136,7 +183,7 @@ watch(() => props.color, (newCol) => material.uniforms.uColor.value = hexToRGB(n
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Derrière le texte */
+  z-index: 0;
   overflow: hidden;
 }
 </style>

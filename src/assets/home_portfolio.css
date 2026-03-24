@@ -17,53 +17,23 @@ body {
     text-align: center;
 } */
 
-.banner {
-    height: 700px; 
-    margin-top: 0;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    position: relative; /* Garde la bannière fixe au scroll */
-    top: 0;           /* <--- AJOUTE CECI pour activer le sticky */
-    z-index: 1;       /* Reste en dessous du main-content */
-    overflow: hidden;
-    background: transparent;
-}
 
-.banner-title {
-    position: absolute; /* Position absolue pour placer le texte où vous le souhaitez */
-    bottom: 20px; /* Distance entre le texte et le bas de la bannière */
-    left: 20px; /* Distance entre le texte et le bord gauche */
-    font-weight: 500; /* Texte en gras */
-    color: #fff; /* Couleur noire pour le texte */
-    margin: 0; /* Supprime les marges par défaut */
-}
-
-.banner h1 {
-    font-size: 13em;
-    margin: 0;
-}
-
-.main-content {
-    position: relative;
-    z-index: 10; 
-    background-color: #181818; 
-    box-shadow: 0 -50px 50px rgba(24, 24, 24, .9);
-    /* AJOUTE CECI : */
-    padding: 1.5rem 5%;
-    
-    /* Assure-toi qu'il n'y a pas d'overflow caché ici qui couperait l'ombre */
-    padding-top: 2rem; /* Évite la fusion des marges */
-}
 
 /* #about {
     padding: 1.5rem 5%;
     background-color: #181818;
 } */
 
-.content {
+/* .content {
     padding: 40px 3%;
     justify-content: center;
+} */
+
+/* Les éléments avec cette classe seront invisibles au départ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px); /* Légère descente */
+  transition: none; /* On laisse GSAP gérer l'animation */
 }
 
 section h2 {
